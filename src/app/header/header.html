@@ -1,0 +1,22 @@
+
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Primary">
+      
+      <!-- Brand Logo -->
+      <a routerLink="/" class="logo">Elevate with <span>Elwil</span></a>
+
+      <!-- Center Links Container -->
+      <div class="site-nav-links">
+        <a routerLink="/" class="site-nav-link" routerLinkActive="active">Home</a>
+        <a routerLink="/programs" class="site-nav-link" routerLinkActive="active">Training Programs</a>
+        <a routerLink="/contact" class="site-nav-link" routerLinkActive="active">Contact</a>
+        <a routerLink="/faq" class="site-nav-link" routerLinkActive="active">FAQ</a>
+      </div>
+
+      <!-- Action Area -->
+      <div class="site-header-actions">
+        <button id="theme-toggle" class="site-theme-button" type="button" (click)="dispatchThemeToggleSignal()">☀</button>
+      </div>
+
+    </nav>
+  </header>

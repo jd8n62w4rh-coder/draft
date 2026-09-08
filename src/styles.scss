@@ -1,1 +1,1249 @@
-/* You can add global styles to this file, and also import other style files */
+// ==========================================================================
+// 1. VARIABLES & THEMING SYSTEM (UPDATED FOR NEW SLATE-BLUE PALETTE & FONTS)
+// ==========================================================================
+// Google Fonts Import
+@import url('https://googleapis.com');
+
+:root {
+  // Your Custom Palette Mapping
+  --bg-primary: #0a173b; // Main Deep Background (10,23,59)
+  --bg-surface: #2f4759; // Grid Surface Elements (47,71,89)
+  --color-accent: #52758f; // Bright Accent Highlights (82,117,143)
+  --text-muted: #71788f; // Mid-tone Supportive Text (113,120,143)
+  --text-primary: #eaf0f7; // Crisp High-Contrast Light Text (234,240,247)
+
+  --bg-dark: var(--bg-primary);
+  --bg-dark-alt: var(--bg-surface);
+  --text-light: var(--text-primary);
+  --text-light-muted: var(--text-muted);
+  --border-light: var(--bg-surface);
+
+  // Font System Integration
+  --font-header: 'Inter', sans-serif;
+  --font-body: 'Roboto', sans-serif;
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Global Document Polish Reset
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// FIX: This forces the default browser layer to render visible text codes
+html,
+body {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  font-family: var(--font-body);
+  /* Roboto for body */
+  line-height: 1.6;
+}
+
+// Fallback visibility regardless of theme-light or theme-dark flags
+#shell {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+// Set global header font-family mapping
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-header);
+  /* Inter for headers */
+  font-weight: 700;
+}
+
+// ==========================================================================
+// 2. SITE HEADER STYLING
+// ==========================================================================
+.site-header {
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-light);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+.site-nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: var(--font-header);
+  font-size: 1.35rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-primary);
+  text-decoration: none;
+  white-space: nowrap;
+
+  span {
+    color: var(--color-accent);
+  }
+}
+
+.site-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  .site-nav-link {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 500;
+    position: relative;
+    padding: 0.25rem 0;
+    transition: var(--transition-smooth);
+
+    &:hover,
+    &.active {
+      color: var(--text-primary);
+    }
+  }
+}
+
+.site-header-actions {
+  display: flex;
+  align-items: center;
+
+  .site-theme-button {
+    background: transparent;
+    border: 1px solid var(--border-light);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+// ==========================================================================
+// 3. ABOUT PAGE GRID FRAMEWORK STYLING (THE REPAIR FIX)
+// ==========================================================================
+.about-section {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  padding: 6rem 2rem;
+  width: 100%;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8rem;
+}
+
+// Top Page Hero Setup
+.about-hero {
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto;
+
+  .subtitle-tag {
+    font-family: var(--font-header);
+    color: var(--color-accent);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+
+  .main-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+  }
+
+  .hero-lead {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+}
+
+// Split Flex Grid Column Frameworks
+.about-block {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: center;
+
+  @media (min-width: 868px) {
+    grid-template-columns: 1.2fr 1fr;
+  }
+
+  &.block-reverse {
+    @media (min-width: 868px) {
+      .block-text {
+        order: 2;
+      }
+
+      .block-visual {
+        order: 1;
+      }
+    }
+  }
+}
+
+.block-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  h2 {
+    font-size: 1.85rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--text-muted);
+  }
+}
+
+.block-visual {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+// No-JS Flex Slide Carousel Components
+.carousel-wrapper {
+  width: 100%;
+  max-width: 400px; // Sets a clean horizontal boundary for the box
+  margin: 0 auto;
+}
+
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  border-radius: 12px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-light);
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.carousel-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+
+  img {
+    width: 100%;
+    // Sets a classic vertical portrait rectangle (taller than wide)
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+  }
+
+  .slide-caption {
+    background-color: var(--bg-surface);
+    color: var(--text-primary);
+    padding: 1.25rem;
+    font-size: 0.9rem;
+    text-align: center;
+    border-top: 1px solid var(--border-light);
+  }
+}
+
+.carousel-nav {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+
+  .nav-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--text-muted);
+  }
+}
+
+
+// Analytical Stat Cards Showcase Styling
+.feature-card {
+  background-color: var(--bg-surface);
+  border-left: 4px solid var(--color-accent);
+  padding: 3rem 2.5rem;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .card-icon {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .card-metric {
+    font-family: var(--font-header);
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    /* Changed to pure light text for readable contrast on dark surface */
+    line-height: 1;
+  }
+
+  .card-label {
+    font-family: var(--font-header);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.4;
+  }
+
+  .card-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    margin-top: 0.5rem;
+
+    li {
+      display: flex;
+      gap: 0.5rem;
+      align-items: flex-start;
+    }
+  }
+}
+
+// Text Block Quote Callout Styling 
+.testimonial-callout {
+  border-left: 4px solid var(--color-accent);
+  padding-left: 2rem;
+  max-width: 450px;
+
+  p {
+    font-size: 1.35rem;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--text-primary);
+  }
+}
+
+// Bottom Action CTA Component Panels
+.cta-box {
+  background-color: var(--bg-surface);
+  padding: 3.5rem 2.5rem;
+  border-radius: 12px;
+  text-align: center;
+  width: 100%;
+  max-width: 440px;
+  border: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  p {
+    font-size: 1rem;
+    color: var(--text-primary);
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+  }
+
+  .cta-button {
+    font-family: var(--font-header);
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: 0.9rem 2.5rem;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: var(--transition-smooth);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(82, 117, 143, 0.25);
+    }
+  }
+}
+
+// ==========================================================================
+// 4. SITE FOOTER STYLING (UPDATED FOR SLATE-BLUE PALETTE & FONTS)
+// ==========================================================================
+.site-footer {
+  background-color: var(--bg-primary);
+  /* #0a173b Canvas */
+  color: var(--text-primary);
+  /* #eaf0f7 Text */
+  padding: 4rem 2rem 2rem 2rem;
+  border-top: 3px solid var(--bg-surface);
+  /* #2f4759 Border */
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--bg-surface);
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .logo {
+    font-family: var(--font-header);
+    /* Inter for Brand Logo Identity */
+    color: var(--text-primary);
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-family: var(--font-body);
+    /* Roboto for Description Paragraphs */
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 360px;
+  }
+}
+
+.footer-links-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  h4 {
+    font-family: var(--font-header);
+    /* Inter for structural navigation labels */
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 700;
+    /* Crisp bold look */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  a {
+    font-family: var(--font-body);
+    /* Roboto for interactive menu links */
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: var(--transition-smooth);
+
+    &:hover {
+      color: var(--text-primary);
+      /* Interactive glow hover effect */
+    }
+  }
+}
+
+.footer-bottom {
+  padding-top: 2rem;
+}
+
+.footer-bottom-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  p {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+}
+
+.social-icons {
+  display: flex;
+  gap: 1.5rem;
+
+  a {
+    font-family: var(--font-header);
+    /* Crisp uppercase layout look for social anchors */
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: var(--transition-smooth);
+
+    &:hover {
+      color: var(--text-primary);
+    }
+  }
+}
+
+// Apply this structural modifier class to your specific horizontal grid container
+.about-block.block-landscape-horizontal {
+  @media (min-width: 868px) {
+    // Keeps side-by-side setup intact but allocates slightly more room for wide assets
+    grid-template-columns: 1.1fr 1.3fr;
+    gap: 3.5rem;
+    align-items: center;
+    /* FIX: Centers the entire visual column vertically against the text box */
+  }
+
+  // Right-hand container stacks items downwards cleanly
+  .block-visual {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    /* Clean, intentional spacing between the carousel nav and the card */
+    align-items: center;
+  }
+
+  // Expanded Carousel Layout Context
+  .carousel-wrapper {
+    width: 100%;
+    max-width: 600px;
+    /* Relaxes previous tight max-width constraint to give layout breathing room */
+  }
+
+  .carousel-slide {
+    img {
+      width: 100%;
+      height: auto;
+      /* Overrides the original vertical hardcoded 350px image height */
+      aspect-ratio: 16 / 9;
+      /* Enforces a perfect native widescreen horizontal frame layout */
+      object-fit: cover;
+      /* Seamless pixel rendering boundaries */
+    }
+  }
+
+  // Custom Feature Card alignment bounds overrides
+  .feature-card-wrapper {
+    width: 100%;
+    max-width: 600px;
+    /* Forces your feature card to snap exactly to the alignment edges of your image layout */
+
+    .feature-card {
+      max-width: 100%;
+      /* Relaxes the global 440px constraint to fit fluid landscape width boundaries safely */
+      background-color: var(--bg-surface);
+      /* #2f4759 Grid Surface Background */
+      border-left: 4px solid var(--text-muted);
+      /* Replaces raw light grey inline code with your #71788f theme rule */
+      padding: 2.25rem 2rem;
+      /* Cleaned up internal padding proportions */
+
+      h3 {
+        font-family: var(--font-header);
+        /* Inter Bold Heading Integration */
+        color: var(--text-primary);
+        /* #eaf0f7 Text */
+        margin-bottom: 0.5rem;
+      }
+
+      .card-label {
+        font-family: var(--font-body);
+        /* Roboto Body Integration */
+        color: var(--text-primary);
+        /* Upgraded contrast to ensure dark mode text remains easy to read */
+        font-weight: 400;
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+    }
+  }
+}
+
+// ==========================================================================
+// TRAINING PROGRAM GRID & LAYOUT SYSTEM
+// ==========================================================================
+
+.programs-section {
+  background-color: var(--bg-primary);
+  /* #0a173b Canvas */
+  color: var(--text-primary);
+  /* #eaf0f7 Text */
+  padding: 6rem 2rem;
+  width: 100%;
+}
+
+.programs-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+// Section Intro Text Styling
+.programs-intro {
+  text-align: center;
+  max-width: 750px;
+  margin: 0 auto;
+
+  .subtitle-tag {
+    font-family: var(--font-header);
+    color: var(--color-accent);
+    /* #52758f */
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+
+  .main-title {
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.5px;
+  }
+
+  .hero-lead {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    /* #71788f */
+    line-height: 1.6;
+  }
+}
+
+// Section Divider Labels
+.section-divider {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid var(--bg-surface);
+
+  h2 {
+    font-family: var(--font-header);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+}
+
+// Common Shared Checklist Rules (Clean Reset)
+%base-checklist {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+
+  li {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-primary);
+    position: relative;
+    padding-left: 1.5rem;
+
+    &::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      /* #52758f Checkmarks */
+      font-weight: 700;
+    }
+  }
+}
+
+// ==========================================================================
+// COMPONENT: START HERE ASSESSMENT (WIDE CARD ROW)
+// ==========================================================================
+.assessment-row-card {
+  background-color: var(--bg-surface);
+  /* #2f4759 Grid Card */
+  border-left: 4px solid var(--color-accent);
+  padding: 3.5rem 3rem;
+  border-radius: 12px;
+  position: relative;
+
+  .card-badge {
+    position: absolute;
+    top: -12px;
+    left: 2rem;
+    background-color: var(--color-accent);
+    color: var(--bg-primary);
+    font-family: var(--font-header);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.35rem 1rem;
+    border-radius: 4px;
+  }
+
+  .assessment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+
+    h2 {
+      font-family: var(--font-header);
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .meta-tag {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      background: rgba(10, 23, 59, 0.4);
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      color: var(--text-primary);
+      display: inline-block;
+      margin-top: 0.5rem;
+    }
+
+    .price {
+      font-family: var(--font-header);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1;
+    }
+  }
+
+  .assessment-lead {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+    max-width: 950px;
+  }
+
+  .assessment-features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem 3rem;
+    border-bottom: 1px solid rgba(234, 240, 247, 0.1);
+    padding-bottom: 2rem;
+    margin-bottom: 1.5rem;
+
+    .feature-checklist {
+      @extend %base-checklist;
+    }
+  }
+
+  .enrollment-credit-box {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    background: rgba(10, 23, 59, 0.3);
+    padding: 1.25rem 1.75rem;
+    border-radius: 8px;
+    border: 1px dashed rgba(82, 117, 143, 0.4);
+
+    span {
+      color: var(--text-primary);
+      font-weight: 700;
+      text-decoration: underline;
+    }
+  }
+}
+
+// ==========================================================================
+// COMPONENT: CORE 3-COLUMN PRICING MATRIX GRID
+// ==========================================================================
+.pricing-matrix-grid {
+  display: grid;
+  // Creates responsive columns that automatically break or layout side-by-side cleanly
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  align-items: stretch;
+  /* Standardizes equal heights across cards */
+}
+
+.pricing-card {
+  background-color: var(--bg-surface);
+  /* #2f4759 Surface Grid */
+  border: 1px solid rgba(234, 240, 247, 0.05);
+  border-radius: 12px;
+  padding: 3rem 2.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  transition: var(--transition-smooth);
+
+  // Featured Highlight Variant Block (Online Coaching Card #2)
+  &.featured-card {
+    border: 2px solid var(--color-accent);
+    transform: scale(1.02);
+
+    @media (max-width: 1024px) {
+      transform: none;
+      /* Disables scaling offsets on fluid tablet viewport configurations */
+    }
+
+    .popular-ribbon {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      background-color: var(--color-accent);
+      color: var(--bg-primary);
+      font-family: var(--font-header);
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+    }
+  }
+
+  .card-top {
+    margin-bottom: 2rem;
+
+    h3 {
+      font-family: var(--font-header);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1.25rem;
+    }
+
+    .card-price {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+
+      .amt {
+        font-family: var(--font-header);
+        font-size: 3rem;
+        font-weight: 800;
+        color: var(--text-primary);
+        line-height: 1;
+      }
+
+      .freq {
+        font-family: var(--font-body);
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        /* #71788f */
+      }
+    }
+
+    .card-audience {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--text-primary);
+    }
+  }
+
+  .card-body {
+    margin-bottom: 2.5rem;
+    flex-grow: 1;
+    /* Pushes footer blocks downward dynamically */
+
+    .list-heading {
+      display: block;
+      font-family: var(--font-header);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-accent);
+      margin-bottom: 1rem;
+    }
+
+    .card-checklist {
+      @extend %base-checklist;
+
+      .exclusion-item {
+        color: var(--text-muted);
+        font-style: italic;
+
+        &::before {
+          content: "✕";
+          color: var(--text-muted);
+        }
+      }
+    }
+  }
+
+  .card-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .value-statement {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: var(--text-primary);
+      border-top: 1px solid rgba(234, 240, 247, 0.1);
+      padding-top: 1.25rem;
+    }
+  }
+}
+
+// Core Component CTA Action Buttons
+.cta-button-solid {
+  font-family: var(--font-header);
+  display: block;
+  text-align: center;
+  background-color: var(--color-accent);
+  color: var(--text-primary);
+  text-decoration: none;
+  padding: 1rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: var(--transition-smooth);
+
+  &:hover {
+    filter: brightness(1.15);
+    box-shadow: 0 8px 20px rgba(82, 117, 143, 0.2);
+  }
+}
+
+.cta-button-outline {
+  font-family: var(--font-header);
+  display: block;
+  text-align: center;
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--color-accent);
+  text-decoration: none;
+  padding: 1rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: var(--transition-smooth);
+
+  &:hover {
+    background-color: rgba(82, 117, 143, 0.1);
+  }
+}
+
+// ==========================================================================
+// COMPONENT: ADD-ON BOTTOM FOOTER ROW
+// ==========================================================================
+.addon-footer-row {
+  margin-top: 2rem;
+
+  .addon-card {
+    background-color: var(--bg-surface);
+    border-radius: 12px;
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+    align-items: center;
+
+    @media (max-width: 868px) {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 2.25rem;
+    }
+  }
+
+  .addon-main {
+    .addon-badge {
+      font-family: var(--font-header);
+      font-size: 0.75rem;
+      color: var(--color-accent);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    h3 {
+      font-family: var(--font-header);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .addon-desc {
+      font-family: var(--font-body);
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .addon-uses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem 2rem;
+
+      ul {
+        @extend %base-checklist;
+      }
+    }
+  }
+
+  .addon-side {
+    text-align: center;
+    background-color: rgba(10, 23, 59, 0.3);
+    padding: 2.5rem 2rem;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    justify-content: center;
+
+    .addon-price {
+      display: flex;
+      flex-direction: column;
+
+      .price-val {
+        font-family: var(--font-header);
+        font-size: 2.75rem;
+        font-weight: 800;
+        color: var(--text-primary);
+        line-height: 1;
+      }
+
+      .price-time {
+        font-family: var(--font-body);
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-top: 0.5rem;
+      }
+    }
+  }
+}
+
+.cta-button-flat {
+  font-family: var(--font-header);
+  display: block;
+  text-align: center;
+  background-color: rgba(82, 117, 143, 0.2);
+  color: var(--text-primary);
+  border: 1px solid rgba(82, 117, 143, 0.3);
+  text-decoration: none;
+  padding: 0.85rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: var(--transition-smooth);
+
+  &:hover {
+    background-color: var(--color-accent);
+    color: var(--bg-primary);
+  }
+}// ==========================================================================
+// FAQ ACCORDION COMPONENT LAYOUT
+// ==========================================================================
+
+.faq-section {
+  background-color: var(--bg-primary); /* #0a173b Canvas */
+  padding: 6rem 2rem;
+  width: 100%;
+  border-top: 1px solid var(--bg-surface); /* #2f4759 Break Rule */
+}
+
+.faq-container {
+  max-width: 850px; /* Constrains column width to match perfect layout hierarchy metrics */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+// Top Text Block
+.faq-intro {
+  text-align: center;
+
+  .subtitle-tag {
+    font-family: var(--font-header);
+    color: var(--color-accent); /* #52758f */
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: inline-block;
+    margin-bottom: 0.75rem;
+  }
+
+  h2 {
+    font-family: var(--font-header); /* Inter Bold */
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: var(--text-primary); /* #eaf0f7 Text */
+    margin-bottom: 1rem;
+  }
+
+  .hero-lead {
+    font-family: var(--font-body); /* Roboto */
+    font-size: 1.1rem;
+    color: var(--text-muted); /* #71788f */
+  }
+}
+
+// Accordion Wrapper Core
+.faq-accordion-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Gap spacing separating adjacent accordion items */
+}
+
+.faq-item {
+  background-color: var(--bg-surface); /* #2f4759 Grid Surface Panels */
+  border: 1px solid rgba(234, 240, 247, 0.03);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+
+  &:hover {
+    border-color: rgba(82, 117, 143, 0.3); /* Subtle glow highlight effect */
+  }
+}
+
+// Completely hides utility radio/checkbox components natively from browser interaction
+.faq-toggle {
+  display: none;
+}
+
+// Clickable Structural Header Block Layer
+.faq-trigger {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.75rem 2rem;
+  cursor: pointer;
+  user-select: none;
+  
+  h3 {
+    font-family: var(--font-header); /* Inter Bold Questions */
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.4;
+    padding-right: 1.5rem;
+  }
+
+  // Pure CSS Accordion Chevron Indicators
+  .chevron-icon {
+    width: 10px;
+    height: 10px;
+    border-bottom: 2px solid var(--text-primary);
+    border-right: 2px solid var(--text-primary);
+    transform: rotate(45deg);
+    transition: var(--transition-smooth);
+    flex-shrink: 0;
+    margin-top: -4px;
+  }
+}
+
+// Collapsed Hidden Content Panel Rules
+.faq-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0 2rem; /* Shuts down absolute height on layout loads */
+
+  p {
+    font-family: var(--font-body); /* Roboto Answers */
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-primary); /* Easy high-contrast dark text view mapping */
+    padding-bottom: 1.75rem; /* Safe padding spacing when content rolls down */
+  }
+}
+
+// ==========================================================================
+// ACCORDION PURE CSS INTERACTION ENGINE
+// Checks toggle states and alters properties of standard selector siblings
+// ==========================================================================
+.faq-toggle:checked {
+  ~ .faq-trigger {
+    .chevron-icon {
+      transform: rotate(-135deg); /* Flips icon when open */
+      margin-top: 4px;
+    }
+  }
+
+  ~ .faq-content {
+    max-height: 500px; /* Arbitrary high value to support fluid sliding content expansion */
+  }
+}
