@@ -1,4 +1,3 @@
-//A3 INSTRUCTIONS
 import { Component } from "@angular/core";
 
 @Component({
